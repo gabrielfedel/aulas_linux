@@ -8,3 +8,5 @@ As apresentações estão em 2 tipos de formatos:
 .pin -> criado usando pinpoint
 
 .odp -> formato do libreoffice
+
+Todo o material aqui disponibilizado está disponibilizado pela Creative Commons Attribution-ShareAlike 4.0 International : http://creativecommons.org/licenses/by-sa/4.0/
