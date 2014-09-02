@@ -1,0 +1,154 @@
+[text-align=center]
+[linux3.jpg]
+--
+
+Cron
+
+Agendador de Tarefas
+
+--
+
+Fundamental para tarefas de 
+administração
+
+Não é necessário "lembrar de fazer"
+
+--
+
+<b>cron</b>
+
+--
+
+É um a ferramenta para rodar 
+comandos em um determinado momento
+
+--
+
+Roda desde que o computador é 
+ligado até ser finalizado
+
+--
+
+Você pode configura-lo pra 
+fazer qualquer coisa que se 
+faz com o shell
+
+--
+
+<b>crontab</b>
+
+--
+
+Um arquivo de configuração do 
+cron é chamado crontab
+
+--
+
+Ficam armazenados em <b>/var/spool/cron</b>
+
+--
+
+O ideal é se modificar os arquivos 
+usando o comando <b>crontab</b>
+assim o cron fica sabendo da modificação
+
+--[text-align=left]
+
+Cada arquivo crontab tem o formato 
+similar, cada linha indica um comando:
+
+<i>minuto hora diames mes diasemana comando</i>
+
+* minuto 0 a 59
+* hora 0 a 23
+* diames 1 a 31
+* mes 1 a 12
+* diasemana 0 a 6 (0 é domingo)
+
+--[text-align=left]
+
+Cada valor pode ser
+
+ 	• * indicando qualquer valor
+
+	• inteiro indicando que casa 
+exatamente com ele
+
+	• dois números com um - (ex: 1-5) 
+que indica um intervalo
+
+(cont...)
+
+-- [text-align=left]
+
+	• números separados por vírgula 
+casam com qualquer um destes valores
+
+	• dois números separados com - 
+e mais um valor depois de uma barra (0-10/2) 
+indica que vai de 0 a 10 de 2 em 2
+
+--
+
+Usando o <b>crontab</b>
+
+--
+
+<i>crontab arquivo</i>
+
+troca qualquer arquivo que tenha 
+no seu crontab pelo arquivo
+
+--
+<i>crontab -e</i>
+
+abre o arquivo do seu crontab 
+para edição
+
+--
+
+<i>crontab -l</i>
+
+lista o que está no seu crontab
+
+--
+
+<i>crontab -r</i>
+
+remove seu arquivo de crontab
+
+--
+
+Outros arquivos de cron
+
+--
+
+<i>/etc/crontab</i>
+
+Normalmente editado pelo administrador
+
+--
+
+<i>/etc/cron.d</i>
+
+Normalmente é inserido por pacotes
+
+--
+
+Ambos com uma pequena diferença, 
+que permite indicar o usuário que 
+vai executar o comando
+
+--
+
+<b>Ambiente no cron</b>
+
+--
+
+Comandos executados no cron não 
+executa como um shell logado
+
+Variáveis de sistema podem não ser 
+carregadas como se espera
+
+--

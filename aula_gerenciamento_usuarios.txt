@@ -1,0 +1,258 @@
+Gerenciamento de Usuários
+
+-pode ser uma tarefa chata e repetitiva -> usar ferramentas que auxiliem na automatização
+
+-A gestão normalmente não vai envolver somente o usuário local, mas a gestão de um conjunto de contas e senhas
+
+---
+
+-A Higiêne das contas é uma chave para determinar a segurança do sistema
+
+-As contas são frequentemente alvo de ataques
+
+----
+
+Mesmo usando ferramentas automatizadas é importante saber o que elas estão fazendo no sistema
+
+Por isso -> vamos ver o gerenciamento de contas com arquivos "planos"
+
+---
+
+Depois -> Ferramentas (useradd, userdel, usermod)
+
+---
+
+Ferramentas gráficas normalmente não tem modo de "lote" ou localização avançada
+
+
+---
+
+/etc/passwd
+
+- lista de usuários reconhecidos pelo sistema
+
+- o sistema consulta esse arquivo na hora do login para determinar UID e o diretório home do usuário (e várias outras coisas)
+
+- cada linha contém as seguintes informações
+
+Login name
+Encrypted password placeholder
+UID (user ID) number
+Default GID (group ID) number
+“GECOS” information: full name, office, extension, home phone
+Home directory
+Login shell
+
+---
+
+----- Login name
+
+-precisa ser único
+
+- Tamanho máximo 32 bits
+- pode ser caracteres de a-zO-0_-
+- primeiro caracter a-z_
+
+(algumas distros podem ser diferentes)
+
+-Interessante determinar padrões
+
+---
+
+O password ficava nesse arquivo, mas agora fica em um que não é legível por todos
+
+/etc/shadow
+
+Quando criar um usuário novo no /etc/passwd -> colocar x no password
+
+Se deixar em branco -> sem senha
+
+---
+
+---- UID
+
+32 bits
+
+root -> UID 0
+
+-pseudo-users -> que vão ser donos de comandos e arquivos de configuração
+
+-é comum no arquivo ter logins falsos para manter os UID's baixos reservados
+
+e deixar no shell /bin/false para nínguem conseguir logar com ele
+
+-recomenda-se utilizar UID acima de 500 para novos usuários
+----
+
+-Não reutilize UID (problemas quando recuperar um backup)
+
+-Mantenha únicos UID para a empresa, senão pode gerar problemas para NFS entre outros
+
+---
+Se tiver vários grupos, com gerentes de TI diferentes, pode ter faixas de UID pra cda
+
+LDAP é uma solução para gestaõ de UIDs e informações da conta do usuário
+
+
+----GID
+
+0 -> grupo root
+
+existem GID's predefinidos também, porém variam de ditribuição pra ditribuição
+
+-> antigamente, grupos foram usados pra dividr recursos de CPU
+
+-> hoje, basicamente pra compartilhar acesso a arquivos
+
+/etc/group -> info dos grupos
+
+no /etc/passwd tem somente o default (que é o usado pra criar arquivos)
+
+----GECOS -> guarda informações pessoais de cada usuário
+
+Não tem padrão
+
+chfn -> usuário muda seu GECO
+|-> modifica somente o /etc/passwd
+
+----Home directory
+
+se não tiver -> vai pro /
+
+pode-se definir (no /etc/login.defs) para não logar se não tiver o home
+
+--Login shell
+
+Um interpretador de comandos
+
+Pro linux o padrão é o bash
+
+-chsh
+
+
+
+
+
+
+
+------------/etc/shadow
+
+/etc/shadow -> somente o root
+
+guarda senha encriptada, e outras informações que não puderam estar no /etc/passwd
+
+
+Login name
+Encrypted password
+Date of last password change
+Minimum number of days between password changes
+Maximum number of days between password changes
+Number of days in advance to warn users about password expiration
+Days after password expiration that account is disabled
+Account expiration date
+A reserved field that is currently always empty
+
+---
+----- Password encriptado
+
+-pode-ser usar diferentes algoritmos de encriptação para as senhas
+
+-Linux normalmente suporta crypt, MD5 e Blowfish, SHA 256 e 512
+
+-Tamanho da senha -> 5 a 8
+
+
+-arquivo - /etc/login.defs várias configurações do sistema de usuário
+|->ver variável - ENCRYPT_METHOD
+---
+
+
+
+SHA 256 e 512 -> são bem fortes
+
+MD5 passwords are easy to spot because they always start with $1$ or $md5$
+Blowfish passwords start with $2a$ and SHA256 passwords with $5$
+
+
+
+---
+
+
+
+
+data fica armazenada como dias a partir de 1/1/70
+
+conversão ->
+
+expr ‘date +%s‘ / 86400
+
+------/etc/group
+
+
+Group name
+Encrypted password or a placeholder
+GID number
+List of members, separated by commas (be careful not to add spaces)
+---
+
+
+-pode possuir senha para os usuários se adicionarem a um grupo -> newgrp
+
+-iniciar a partir de 500 o GID
+
+-groupadd, groupmod, groupdel
+
+--------------Outros pontos importantes
+
+----Password
+
+-nunca deixe uma conta sem senha
+
+- passwd -> definindo uma senha
+
+----Arquivos de inicialização
+
+
+.profile  -> executado quando se loga em um shell
+
+.bashrc -> executado em shells sem login:
+
+http://hacktux.com/bash/bashrc/bash_profile
+
+---Definindo permissoẽs e donos
+
+sudo chown -R newuser:newgroup ~newuser
+
+
+----verificando se tudo está ok
+
+depois de logar:
+
+pwd
+ls -la
+
+---
+
+
+
+-------adicionando usuários (-> um grupo pra cada)
+
+
+---
+
+Mais referências: http://debian-handbook.info/browse/stable/sect.user-group-databases.html
+
+
+---
+
+Adicionando um usuário como sudo
+
+-> tornar-se root (su -)
+
+-> adiciona o seu usuário ao grupo sudo
+
+adduser aluno sudo
+
+-> reiniciar a máquina
+
+sudo shutdown -r now

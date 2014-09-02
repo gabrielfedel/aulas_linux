@@ -1,0 +1,140 @@
+[linux3.jpg]
+[text-align=center]
+--
+
+Agendando tarefas na inicialização
+
+---
+
+
+O Debian usa um sistema similar ao System V
+
+Origina do Unix
+
+--
+
+Toda inicialização e finalização de serviços
+ está gerenciado pela troca de Run Level's
+
+---
+
+O Debian tem 7 run levels:
+
+ 0 -> Desligando o sistema
+ 1 -> modo mono-usuário
+ 2 à 5 -> modo multi-usuário
+ 6 -> Reiniciando o sistema
+
+--
+
+Os scripts ficam em uma pasta /etc/rc*.d/
+
+Cada * será referente a um run-level
+--
+
+Os scripts na verdade são links simbólicos 
+para outros que estão em /etc/init.d/
+
+--
+
+O nome dos links indica se são 
+para iniciar ou finalizar (S ou K)
+
+O nome também indica a ordem 
+em que precisam ser inicializados
+
+---
+
+Construindo e configurando um 
+script para inicializar e finalizar
+
+--
+
+Utilizando o update-rc.d
+
+
+update-rc.d name [defaults, remove, start | stop]
+--
+
+defaults: start on 2,3,4,5 and stop 0,1,6
+
+--
+
+udpate-rc.d enable | disable
+
+enable -> Muda o script para S
+disable -> Muda o script para K
+
+--
+
+Exemplo:
+
+udpate-rc.d meuscript.sh disable 2
+
+--
+
+Teste prático
+
+Fazer um script que, quando se inicia o sistema,
+imprima a mensagem:
+"Estou funcionando"
+
+No arquivo:
+~/resultado.script
+
+E quando se desliga, imprima
+"Não estou funcionando"
+
+
+--
+
+Parâmetros LSB
+
+
+\### BEGIN INIT INFO
+\# Provides:          skeleton
+\# Required-Start:    $remote_fs $syslog
+\# Required-Stop:     $remote_fs $syslog
+\# Should-Start:      $portmap
+\# Should-Stop:       $portmap
+\# X-Start-Before:    nis
+\# X-Stop-After:      nis
+\# Default-Start:     2 3 4 5
+\# Default-Stop:      0 1 6
+\# X-Interactive:     true
+\# Short-Description: Example initscript
+\# Description:       This file should be used to construct scripts to be placed in /etc/init.d.
+\### END INIT INFO
+
+---
+
+Exemplo de Parâmetros mínimos:
+
+
+\### BEGIN INIT INFO
+\# Provides:          
+\# Required-Start:    
+\# Required-Stop:   
+\# Default-Start:     2 3 4 5
+\# Default-Stop:      0 1 6
+\# Description:       Descrição
+\### END INIT INFO
+
+---
+
+Ferramenta auxiliar:
+
+rcconf
+
+
+---
+
+Referências
+
+http://www.debian-administration.org/articles/28
+
+http://nixsrv.com/llthw/ex15
+
+http://xmodulo.com/2013/01/how-to-automatically-start-program-on-boot-in-debian.html
+
+http://www.cyberciti.biz/faq/howto-runlevel-configuration-tool-to-start-service/

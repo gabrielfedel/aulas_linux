@@ -1,0 +1,147 @@
+[text-align=center]
+[linux3.jpg]
+--
+
+NFS
+
+Sistema de Arquivos de Redes
+
+--
+
+Permite  compartilhar sistemas 
+de arquivos entre computadores
+
+--
+
+Transparente ao usuário
+
+--
+
+Desenvolvido inicialmente 
+para máquinas sem disco
+
+--
+
+Utilizado para compartilhar arquivos
+entre máquinas Linux e UNIX
+
+Para clientes Windows é necessário 
+utilizar CIFS/Samba
+
+--
+
+Permite TCP ou UDP como protocolo 
+da camada de transporte
+
+--
+
+<b>NFS no Lado Servidor</b>
+
+--
+
+Instalando os pacotes necessários
+do lado servidor:
+
+apt-get install nfs-kernel-server
+
+--
+
+Arquivo /etc/exports
+
+--
+
+Permite definir os sistemas de arquivos
+que serão exportados e os clientes
+que podem acessá-los
+
+--
+
+Formato do arquivo
+
+<i>(Diretório)	(Clientes permitidos)</i>
+
+--
+Exemplo
+
+/home/aluno	192.168.30.33(rw,sync,root_squash)
+
+--
+
+Especificação do cliente pode ser
+
+Nome do host
+Endereço IP
+Endereço de rede (formato CIDR)
+Wildcards (como o *)
+
+--[text-align=left]
+
+Alguns tipo de permissões
+
+rw
+ro
+root_squash
+no_root_squase
+secure (acesso deve vir de porta privilegiada)
+insecure (acesso de qualquer porta) 
+
+--
+
+Pode-se definir permissões diferentes
+para os subdiretórios
+
+/home	192.168.0.1/24(rw)
+/home/aluno	(noaccess)
+
+--
+
+Após modificar o /etc/exports
+
+<i>exportfs -a</i>
+
+Reiniciar NFS Server
+
+sudo service nfs-kernel-server restart
+
+--
+
+<b>NFS no Lado Cliente</b>
+
+--
+
+Verificando as pastas disponíveis
+
+<i>showmount -e 192.168.3.1</i>
+
+--
+
+Montando uma partição remota
+
+mount -t nfs 192.168.3.1:/home/minhapasta /home/local
+
+--
+
+Habilitando a montagem permanente
+Editando o /etc/fstab
+
+
+195.12.32.1:/home /home nfs defaults 0 0
+
+--
+
+Estatísticas do NFS
+
+<i>nfsstat</i>
+
+<i>nfsstat -c</i>
+
+--
+
+Referências
+
+Manual Completo do Linux
+Site NFS - http://nfs.sourceforge.net/
+Debian Help
+
+
+--

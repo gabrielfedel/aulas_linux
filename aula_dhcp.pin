@@ -1,0 +1,216 @@
+[text-align=center]
+[linux3.jpg]
+--
+
+DHCP
+
+Automatizando a configuração de uma rede
+
+--
+
+Com um servidor DHCP pode-se configurar
+a rede dos computadores automaticamente
+
+--
+
+Máquinas que se conectam a rede "pedem"
+endereço e outras informações
+
+Os servidores DHCP respondem a requisição
+com um ip válido
+
+--
+
+Alguns parâmetros que o DHCP pode alocar
+
+Endereço IP e máscara de rede
+Roteadores (e rotas padrões)
+Servidores DNS
+
+
+--
+
+Clientes precisam se reportar aos sevidores DHCP
+para manter suas "locações" senão elas expiram
+
+--
+
+Quando um endereço é liberado, pode ser atribuído
+à outra máquina
+
+
+--
+
+Instalando DHCP Server no Debian
+
+--
+
+sudo apt-get install isc-dhcp-server
+
+--
+
+Configurando o DHCP Server
+
+--
+
+Editando o /etc/default/isc-dhcp-server
+
+INTERFACES="eth0"
+
+--
+
+Editando o /etc/dhcp/dhcpd.conf
+
+--[text-align=left]
+
+Alguns parâmetros
+
+Domínio:
+<i>option domain-name "fatecnoturno.org";</i>
+
+Servidor DNS:
+<i>option domain-name-servers 8.8.8.8 4.4.4.4</i>
+
+
+--[text-align=left]
+
+<i>
+subnet 192.168.3.0 netmask 255.255.255.0 {
+
+  range 192.168.3.1 192.168.3.50;
+
+  option routers roteador.fatecnoturno.org;
+
+}
+</i>
+
+--
+
+Iniciando seu DHCP server
+
+<i>
+sudo service isc-dhcp-server stop
+sudo service isc-dhcp-server start
+sudo ifdown eth0
+sudo ifup eth0
+</i>
+--
+
+Verificando se o DHCP está rodando
+
+<i>ps aux | grep dhcpd</i>
+
+--
+
+Verificar mensagens de erro do DHCP
+
+<i>sudo tail /var/log/syslog</i>
+
+--
+
+
+Adicionando um ip fixo para uma máquina
+
+--[text-align=left]
+<i>
+host zeus {
+  hardware ethernet 00:0D:87:B3:AE:A6;
+  fixed-address 192.168.3.5;
+}
+</i>
+
+--
+
+
+Fazendo um teste em uma rede local
+
+--
+
+1 - Configurando o Servidor DHCP
+
+--[text-align=left]
+
+Arquivo /etc/network/interfaces
+
+auto lo
+iface lo inet loopback
+
+auto eth0
+iface eth0 inet static
+    address 192.168.3.1
+    netmask 255.255.255.0
+    broadcast 192.168.3.255
+
+
+--
+
+Arquivo /etc/dhcp/dhcpd.conf
+
+--[text-align=left]
+
+option domain-name "mydebian";
+
+option domain-name-servers 8.8.8.8, 8.8.4.4;
+
+subnet 192.168.1.0 netmask 255.255.255.0 {
+    range 192.168.1.101 192.168.1.254;
+    option subnet-mask 255.255.255.0;
+    option broadcast-address 192.168.1.255;
+    option routers 192.168.1.100;
+    option domain-name-servers home;
+}
+
+default-lease-time 600;
+max-lease-time 7200;
+
+authoritative;
+
+--
+
+2 - Configurando os clientes
+
+--
+
+
+Editar o /etc/network/interfaces
+
+--[text-align=left]
+
+auto lo
+iface lo inet loopback
+
+# Get our IP address from any DHCP server
+auto eth0
+iface eth0 inet dhcp
+--
+
+Monitorando as atribuições
+
+--
+
+No servidor:
+
+/var/lib/dhcp/dhcpd.leases
+
+--
+
+No cliente:
+
+/var/lib/dhcp/dhclient.leases
+
+--
+
+
+Mais informações:
+
+man dhcpd
+
+--
+
+Referências
+
+Manual Completo do Linux
+Wiki do Debian
+
+
+--

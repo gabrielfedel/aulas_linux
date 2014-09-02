@@ -1,0 +1,298 @@
+[text-align=center]
+[linux3.jpg]
+--
+
+Sistema de Log no Linux
+--
+
+<b>Log</b>
+
+Mecanismo para o sistema registrar 
+informações sobre sua execução, 
+erros, e demais informações
+
+--
+
+Esses dados precisam ser tratados
+
+--
+
+<b>Diretivas de Registro em Log</b>
+
+Jogar fora todos os dados
+Fazer rodízio de arquivos de log
+Compactar e arquivar em mídias permanentes
+
+--[text-align=left]
+
+Exemplo script de rodízio:
+
+<i>
+\#!/bin/sh
+cd /var/log
+mv logfile.2 logfile.3
+mv logfile.1 logfile.2
+mv logfile logfile.1
+cat /dev/null > logfile
+chmod 600 logfile
+</i>
+
+--
+
+Existem mecanismos automáticos para rodízio
+<b>logrotate</b> e <b>savelog</b>
+
+--
+
+Configurando o logrotate:
+
+/etc/logrotate.conf
+/etc/logrotate.d/
+
+
+--
+
+<b>Arquivos de Log no Linux</b>
+
+--
+
+A maior parte das distribuições linux 
+enviam seus arquivos de log para <b>/var/log</b>
+
+Ao invés de jogar arquivos de log, utiliza-se 
+um sistema unificado chamado <b>syslog</b>
+
+--[ArquivosLog.png]
+
+--
+
+Segurança
+
+--
+
+Permissão de arquivos de log é 
+interessante que seja <b>600</b>
+(leitura e gravação somente 
+para proprietários)
+
+--
+
+Estes arquivos podem dar brecha 
+para que pessoas mal intencionadas 
+descubram vulnerabilidades no seu sistema
+
+--
+
+Formato dos Arquivos
+
+--
+
+Maior parte dos arquivos são em 
+formato <b>texto</b>, e informações úteis 
+são adicionadas no final do arquivo
+
+--
+
+Alguns como o <b>wtmp</b> e o <b>lastlog</b>
+são gravados em formato binário 
+
+Ambos mantém informações sobre os 
+logins no sistema
+
+Pode-se usar o <i>last</i>
+--
+
+Log de kernel e inicialização
+
+--
+
+O kernel registra tudo em um buffer
+e depois o comando <b>dmesg</b>
+encaminha o registro para o 
+/var/log/dmesg
+
+--
+
+
+Pode ser visualizado utilizando o 
+comando <i>dmesg</i>
+
+--
+
+Pode-se mudar o nível de registro 
+do dmesg
+
+Nível 7 -> Mais prolixo
+Nível 1 -> Somente informações de pânico
+
+<i>dmesg -n 7</i>
+
+--
+
+<b>Syslog</b>
+O registrador de eventos do sistema
+
+--
+
+Foi desenvolvido para que os 
+programadores não se preocuparem 
+em fazer log nos seus programas
+
+-
+
+Permitir que os administradores 
+controlem o processo de registro
+
+--
+
+Pode-se definir diversos destinos:
+arquivos, terminais e até outras
+máquinas
+
+--
+
+É possível utilizar chamadas de
+ programas em C, perl e python
+
+--
+
+Syslog é composto por 3 partes:
+
+<b>syslogd/rsyslogd</b> daemon de 
+registro de log
+
+<b>openlog</b> (e outros) rotinas que 
+submetem mensagens a syslogd
+
+<b>logger</b> comando que submente 
+entradas de log do shell
+
+
+--
+<b>rsyslogd</b> é um extensão 
+mais confiável do Syslog
+
+É o serviço disponível no Debian
+
+--
+
+<b>rsyslogd</b>
+
+Processo que gerencia os arquivos de log
+
+--
+
+<b> /etc/rsyslog.conf </b>
+
+Arquivo de configuração do rsyslog
+
+Formato básico:
+<i> seletor (tab) ação </i>
+
+--
+
+Seletor indica o programa que está
+enviando a mensagem e o nível de 
+gravidade
+
+<i>recurso.nível</i>
+
+--
+
+Seletores podem ter palavras chave:
+<b>*</b> tudo
+<b>none</b> nada
+
+--[niveis_syslog.png]
+
+--
+
+Exemplo
+
+Linha com:
+
+<i>*.emerg   			*</i>
+
+Indica que mensagens de emergência 
+são enviadas a tela de todas as 
+pessoas logadas 
+(como por exemplo shutdown)
+
+--
+
+Outras linhas, encaminham arquivos 
+de log para arquivos em <b>/var/log</b>
+
+--
+
+<b>/etc/rsyslog.d/</b>
+
+Pasta que pode conter mais 
+sub-arquivos de configuração
+
+--
+
+<b>logger</b>
+
+
+--
+
+Comando útil para submeter entradas
+de log em scripts de shell
+
+--[text-align=left]
+
+Exemplo (registrando mensagem de nível 
+informacional)
+
+<i> logger -p local3.info "Informação registrada"
+ more /var/log/syslog
+</i>
+
+
+--
+
+#Transformando arquivos 
+#de log em informações úteis
+
+#--
+
+#<b>syslog</b> é ótimo para ordenar 
+#e encaminhar mensagens de log
+
+#Porém depois de tudo registrado, 
+#pode-se ter muitos dados e não 
+#ver o que é útil
+
+
+#--[text-align=left]
+
+#Ferramentas para processamento de log
+
+#	swatch
+#	logcheck
+
+#--[text-align=left]
+
+#Exemplo de uso de logcheck:
+
+# <i>sudo logcheck-test -l dmesg intel</i>
+
+
+#Pode-se utilizar ao invés de uma "regra" 
+#um arquivo de regras
+
+#--
+--
+
+Referências
+
+Unix and Linux System Administration HandBook
+Dominando Linux RedHat e Fedora
+Man Linux
+
+
+--
+
+#Pontos para inserir depois:
+#logrotate

@@ -1,0 +1,67 @@
+[text-align=center]
+[linux3.jpg]
+--
+
+Drivers e o kernel
+--
+
+Kernel oculta o hardware
+
+Disponibiliza interface de alto nível
+
+--[text-align=left]
+
+Kernel cria os conceitos abaixo
+a partir de recursos de hardware:
+
+Processos
+Sinais e Semáforos
+Memória Virtual
+Sistema de arquivos
+Entrada/Saída Geral
+Comunicação entre processos
+
+--
+
+Kernel possúi drivers de dispositivos
+
+Estes gerenciam sua interação com 
+hardwares específicos
+
+O resto do kernel é independente de
+dispositivo
+
+--
+
+Maior parte escrito em C
+--
+
+Antigamente para administrar era necessário
+conhecer e saber modificar o kernel
+
+Hoje podemos ajustá-lo e adicionar módulos
+preexistentes
+
+--
+
+Métodos de configurar o kernel
+
+--
+
+1. Ajustando os parâmetros do kernel do Linux
+
+--
+
+Arquivos no /proc/sys
+
+--
+
+Parâmetros permanentes em /etc/systcl.conf
+
+--
+
+Referências
+
+Linux - Guia do Administrador
+
+--

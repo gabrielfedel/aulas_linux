@@ -1,0 +1,214 @@
+[text-align=center]
+[linux3.jpg]
+--
+
+Redes no Linux
+
+Introdução
+
+--
+
+Antes, modos de configuração de rede na VirtualBox
+
+--
+
+
+Internet e Redes TCP/IP
+
+--
+
+Aplicação
+Transporte
+Rede
+Enlace
+Física
+
+
+
+--[protocolos_tcp_ip.png] #comentar um pouco sobre cada um dos protocolos
+
+
+
+--
+O TCP
+
+Protocolo orientado à conexão
+Entrega confiável
+Controle de congestinamento
+Controle de fluxo
+
+--
+
+O UDP
+
+Protocolo não orientado à conexão
+
+--
+
+Encapsulamento
+
+--[encapsulamento.png]
+
+--
+
+Aplicação - Mensagem
+Transporte - Segmento
+Rede - Datagrama
+Enlace - Quadro
+Físico - bits
+
+Notação do Kurose
+
+--
+
+Endereçamento de pacotes
+
+--
+
+Endereços MAC - para hardware
+Endereços IP - para software
+Nome de host - para pessoas
+--
+
+Endereços MAC - fixo
+
+ou nem tanto
+
+--
+
+Endereço IP
+
+Globalmente exclusívos
+
+--
+
+Mapeamento MAC - IP
+
+Normalmente feito pelo protocolo ARP
+
+--#mostrar os arquivos
+
+Nome de host - Endereço IP
+(apenas um apelido para o endereço IP)
+
+Podem ser configurados fixamente
+(/etc/hosts)
+
+Podem ser configurados dinâmicamente 
+(DNS)
+
+--#mostrar o resultado do ifconfig e pedir para eles fazerem um teste de modificar o /etc/hosts
+
+
+
+ifconfig
+
+(uma visão rápida)
+
+
+--
+
+ping
+
+verificando se uma máquina é "alcançável"
+
+--
+
+Um teste
+
+Modificando o /etc/hosts
+--
+
+Portas
+
+Identificando processos
+
+--
+
+Portas "bem conhecidas"
+
+/etc/services
+--
+
+Endereço IP detalhadamente
+
+--
+
+32 bits
+divididos em conjutos de 8:
+
+ex: 192.168.200.57
+
+Uma parte identifica a rede
+
+Outra parte identifica o host
+
+
+--
+
+Sub-redes
+Máscara de Rede
+Endereço de Rede
+Endereço de Broadcast
+
+--
+
+
+pacote ipcalc
+
+
+--#material na página 209
+
+ifconfig
+
+configurando interfaces de rede
+
+<i> ifconfig interface endereço opções up </i>
+
+
+--
+
+<b>netstat -i</b>
+
+Para listar interfaces conectadas 
+no momento
+--
+
+<b>ifconfig eth0</b>
+
+Lista informações sobre 
+a interface eth0
+
+--
+
+<b>up</b> ativa interface
+
+<b>down</b> desativa interface
+
+--
+
+ifconfig eth0 (end. ip) up
+
+ifconfig eth0 (end. ip) netmask (masc. de rede) up
+
+-- 
+
+O arquivo /etc/network/interfaces
+
+--
+
+Deixando um endereço fixado
+
+iface eth0 inet static
+	address 192.168.1.102
+	netmask 255.255.255.0
+	gateway 192.168.1.254
+
+--
+Referências
+
+Manual Completo do Linux
+Guia do Administrador
+Nemeth
+
+--

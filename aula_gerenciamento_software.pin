@@ -1,0 +1,459 @@
+[text-align=center]
+[linux3.jpg]
+--
+Instalação e Atualização de 
+Softwares no GNU/Linux
+
+--
+
+Papel fundamental
+
+SO funciona como plataforma
+
+--
+
+Instalação de Software no Linux
+Introdução
+
+--
+
+Mais simples do que parece
+
+--
+
+Maior parte dos aplicativos são abertos
+
+--
+
+Sem necessidade de comprar, registrar, 
+tirar banners, desativar spywares
+
+--
+
+Pode variar dependendo do 
+aplicativo e da distribuição
+
+-- 
+
+--
+
+No princípio, a compilação
+
+--
+
+Arquivos .tar.gz
+
+--
+
+Baixar arquivos compactados 
+.tar.gz com código e compilar
+
+São gerados executáveis, bibliotecas, 
+arquivos de configuração 
+(encaminhados para suas respectivas pastas)
+
+--
+
+Método consistente para softwares 
+abertos, permitindo alterações no 
+processo de instalação
+
+--
+
+Configurando o proxy para baixarmos
+
+--[text-align=left]
+
+Editar o arquivo ~/.wgetrc
+
+http_proxy=http://192.168.200.57:3128
+proxy_user=usuario
+proxy_password=senha
+
+--
+
+Vamos baixar o Zlib:
+zlib.net
+
+--
+
+wget http://zlib.net/zlib-1.2.8.tar.gz
+
+--
+
+Descompactando:
+
+tar xzfv zlib-1.2.8.tar.gz
+
+--[text-align=left]
+Instalando
+
+
+Arquivo README
+
+Executando:
+
+  ./configure
+
+  make
+
+  sudo make install
+
+--[text-align=left]
+
+Desinstalando
+
+	make uninstall
+
+	uninstall
+
+	make -n install
+
+--
+
+Problemas
+
+--
+
+Demorado
+
+Nem sempre simples 
+(necessidade de compiladores, 
+bibliotecas)
+
+--
+
+Exemplo 2
+
+http://freecode.com/projects/gif2png
+
+
+--
+
+wget 
+http://www.catb.org/~esr/
+gif2png/gif2png-2.5.8.tar.gz
+
+
+--
+
+Depedências!
+
+
+--
+
+--
+
+Pacotes pré-compilados
+
+--
+
+Para evitar o re-trabalho 
+de sempre compilar
+
+--
+
+Uma pessoa compilava, 
+e distribuía
+
+--
+
+Pacote = Arquivo compactado 
+com a estrutura de pastas 
+e arquivos que seria criada
+
+--
+
+Quando se instala, os arquivos 
+vão para as pastas corretas 
+(e quando desinstala tudo é 
+removido, de forma rápida e limpa)
+
+--
+
+Basicamente três formatos diferentes
+
+--
+
+.deb : utilizado nas distribuições 
+derivadas do Debian (Ubuntu, Kubuntu, etc.)
+
+--
+
+.rpm: utilizado nas distribuições 
+derivadas do Red Hat (Fedora, Mandriva, …)
+
+--
+
+.tgz: usado pelo Slackware e derivados
+
+--
+
+Pacotes Pré-Compilados
+Ferramentas
+
+--
+
+Dpkg → .deb
+
+Rpm → .rpm
+
+--
+
+Pacotes pré-compilados
+Exemplos
+
+--
+
+Acl
+
+http://packages.debian.org/wheezy/acl
+
+--
+
+wget
+
+http://ftp.br.debian.org/
+debian/pool/main/a/acl/
+acl_2.2.51-8_i386.deb
+
+--
+
+Instalando
+
+dpkg -i
+
+acl_2.2.51-8_i386.deb
+
+--
+
+Removendo
+
+dpkg -r
+
+acl
+
+--
+
+Instalando Lynx
+
+http://packages.debian.org/wheezy/lynx
+
+--
+
+wget
+
+http://ftp.br.debian.org/debian/
+pool/main/l/lynx-cur/
+lynx_2.8.8dev.12-2_all.deb
+--
+
+dpkg -i pidgin_2.10.6-3_i386.deb
+
+--
+
+
+--
+
+Gerenciador 
+de Pacotes
+
+--
+
+Instala pacotes de forma automática
+
+--
+
+Baixa outros programas e bibliotecas 
+que o programa vai precisar
+
+--
+
+Acessa repositórios, escolhendo a 
+última versão adequada ao seus sistema
+
+--
+
+Repositórios
+
+--[text-align=left]
+
+CD/DVD
+
+Servidor Web
+
+Configurável
+
+--
+
+Gerenciadores de pacotes
+
+--[text-align=left]
+
+Apt (Debian/Ubuntu)
+
+Synaptic (Debian/Ubuntu)
+
+Urpmi (Mandriva)
+
+Yum (Fedora)
+
+Zypper (OpenSUSE)
+
+--
+
+APT - Repositórios
+
+/etc/apt/sources.list
+
+--[text-align=left]
+
+APT - Repositórios
+
+* Retirar CD
+
+--
+
+* Inserir pelo menos os seguintes repositórios
+
+	deb http://ftp.debian.org/debian/ wheezy main
+	deb-src http://ftp.debian.org/debian/ wheezy main
+
+--
+
+Configurando proxy para APT
+
+pico /etc/apt/apt.conf
+
+--
+
+/etc/apt/apt.conf
+
+Acquire {
+HTTP::proxy "http://usuario:senha@192.168.200.57:3128";
+FTP::proxy "http://usuario:senha@192.168.200.57:3128";
+}
+
+--
+
+APT
+Atualizando a lista de pacotes
+
+apt-get update
+
+--
+
+APT
+Instalando pacotes
+
+apt-get install
+
+--
+APT
+procurando pacotes
+
+apt-cache search
+
+--
+
+Voltando ao lynx
+
+dpkg -r lynx
+apt-get install lynx
+
+--
+
+Outros comandos do apt
+
+apt-cache policy
+
+--
+
+Instaladores
+--
+
+Similar ao que acontece no Windows
+
+Arquivos que inicia processo de instalação
+
+Normalmente maiores e mais pesados
+
+--[instalador.png]
+
+--
+Permissão de execução
+
+Não vem habilitada
+
+--
+
+Ativando a permissão
+
+chmod a+x instalador
+
+--
+
+Problemas com o modo gráfico
+
+QT x GTK
+
+--
+Wine
+
+Programas Windows 
+no Linux
+--
+
+Wine
+Wine Is Not a Emulator
+
+--
+
+É possível?
+
+--[command=firefox www.winehq.org]
+
+Wine - http://www.winehq.org/
+
+--[command=firefox appdb.winehq.org]
+
+http://appdb.winehq.org/
+
+--
+
+--
+
+Revisando
+
+--
+
+Métodos de Instalação
+
+--[text-align=left]
+Compilação
+
+Pacote pré-compilado
+
+Gerenciador de pacotes
+
+Instaladores
+
+Wine
+
+--
+
+--
+Referências
+
+--[text-align=left]
+
+• Linux – Guia Prático – Carlos E. Morimoto
+
+• Manual Completo do Linux, Guia do administrador – Evi Nemeth
+
+• Sites das distribuições
+	• Debian
+	• Fedora
+	• Slackware
+
+• man

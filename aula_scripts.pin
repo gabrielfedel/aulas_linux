@@ -1,0 +1,504 @@
+[text-align=center]
+[linux3.jpg]
+--
+
+Scripts
+
+--
+
+Padronizam e automatizam as tarefas administrativas
+
+--
+
+Podem ser desde de simples rotinas do dia a dia, 
+até complexos scripts que controlam todo um site
+
+--
+
+Precisam ser simples e entendíveis (ao invés de eficientes)
+
+--
+
+Não importa muito se leva 1 ou .5 segundo
+
+--
+
+Prefira o simples ao complexo (ex: yes)
+
+--
+
+Shell
+
+--
+
+Bash (Bourne-again Shell)
+
+--
+
+Shell é sempre disponível, portanto poucos 
+problemas de portabilidade
+
+--
+
+Não possuem estrutura de módulo e bibliotecas
+de terceiros
+
+--
+
+Fazendo Scripts Bash
+
+--
+
+Automatizar coisas que você faz na linha 
+de comandos (bash)
+
+--
+
+Se chegar a 100 linhas pensar em ir 
+para perl ou python
+
+--
+
+Scripts - Símbolos
+
+--
+
+comentário \#
+
+--
+
+\\ serve para continuar um comando em 
+outra linha (pode ser usado no shell também)
+
+--
+
+Script em Bash
+
+--
+
+É composto por uma série de linhas de comandos
+
+--[text-align=left]
+
+\#!/bin/bash
+echo "Hello world!"
+
+--
+
+Primeira linha identifica que é um script
+E onde está o interpretador de comandos
+
+--
+
+Para Executar
+
+--[text-align=left]
+
+chmod +x script.sh
+./script.sh
+
+--
+
+Executável não é determinado pela 
+extensão, mas pelas permissões
+
+--[transition=page-curl-both]
+
+Escrevendo um script
+
+--
+
+Diferente de um desenvolvimento tradicional
+você pode desenvolver scripts de maneira 
+interativa 
+
+--
+
+Possibilidade de testar o que vai fazer 
+antes de criar o arquivo em sí
+
+
+--[transition=page-curl-both]
+
+Variáveis
+
+--
+
+Para atribuir basta cita-las
+
+var='abc'
+
+--[fill] [transition=slide-in-left]
+
+Para acessar é necessário o $
+
+echo $var
+
+--
+
+Não usar espaço em branco entre o '=' 
+e a variável
+
+--
+
+Usar o { e } para determinar 
+quando começa e termina a variável
+
+<i>
+a=abc
+echo Oi tudo bem ${a}def
+</i>
+
+--
+
+Por padrão variáveis em caixa alta são 
+variáveis de ambiente ou globais
+
+--[transition=page-curl-both]
+
+Variáveis de Ambiente
+
+--
+
+export
+
+--
+
+São importadas automaticamente 
+para o seu script
+
+--[transition=page-curl-both]
+
+Simbolos Especiais
+
+--
+
+"" e ' '  são tratados similarmente
+
+--
+
+""  -> realiza expansão de variáveis
+
+--
+
+mylang="Pennsylvania Dutch"
+echo "I speak ${mylang}."
+echo 'I speak ${mylang}.'
+
+--
+
+` `  -> executam o comando e 
+substituem ele pelo resultado
+
+--
+
+echo "existem `wc -l /etc/passwd`"
+
+--[transition=page-curl-both]
+
+Entrada e Saída
+
+--
+
+echo -> maneira de usar a saída simplória
+
+--
+
+printf -> mais controle da saída
+
+--
+
+echo "\\taa\\tbb\\tcc\\n"
+
+printf "\\taa\\tbb\\tcc\\n"
+
+--
+
+read -> ler uma entrada
+
+--[text-align=left]
+
+\#!/bin/bash
+echo -n "Enter your name: "
+read user_name
+echo "Hello $user_name!"
+
+--[transition=page-curl-both]
+
+Argumentos da Linha de Comando
+
+--
+
+Argumentos : $1 $2 ... $n
+
+--
+
+$0 nome do script que foi invocado 
+(não é um valor fixo)
+
+--
+
+$# número de argumentos
+
+--
+
+$* contém todos os argumentos
+ de uma vez
+
+--
+Pipes e Redirection
+
+--[text-align=left]
+
+Todo processo tem pelo menos 3 canais de comunicação:
+
+*STDIN
+*STDOUT
+*STDERR
+
+--[text-align=left]
+
+Cada canal tem um código que o identifica
+
+*STDIN 0
+*STDOUT 1
+*STDERR 2
+
+--[text-align=left]
+
+Por padrão
+
+*STDIN - teclado
+*STDOUT - monitor
+*STDERR  - monitor
+ 
+--[text-align=left]
+
+\< , \> e \>\> são sinais que mudam a rota 
+de uma entrada ou saída para ou de um arquivo
+
+--
+
+< conecta o STDIN à um arquivo existente
+
+--
+
+\> conecta o STDOUT, 
+sobrescrevendo o arquivo
+
+--
+
+\>> conecta o STDOUT, 
+gravando no final do arquivo
+
+--
+
+>& conecta o STDOUT e o STDERR 
+para o mesmo lugar
+
+--
+
+2> conecta somente o STDERR
+
+--
+
+find / -name core
+
+find / -name core 2> /dev/null
+ 
+--
+
+| pipe, conecta o STDOUT de um 
+comando com o STDIN de outro
+
+--
+
+ps -Al | grep init
+
+--
+
+\&\& executa um comando somente se 
+o primeiro executar corretamente
+
+--
+
+cp userlist.txt teste.txt \&\& echo 'comando ok!'
+
+--
+
+||   executa um comando somente se o 
+primeiro realizar algum erro
+
+--
+
+cp userlist.txt /teste.txt || echo 'erro!'
+
+--[transition=page-curl-both]
+
+Controle de Fluxo
+
+<b>if</b>
+
+--[text-align=left]
+
+if [ $var -eq 1 ]; then
+echo 'resultado 1'
+else
+echo 'outro resultado'
+fi
+
+--[comparadores_if.png]
+
+--
+
+Comparadores de Arquivo
+
+--[comparadores_if_arq.png]
+
+--
+
+Case
+
+--[text-align=left]
+
+case $1 in
+0) echo "foi 0";;
+1) echo "foi 1";;
+2) echo "foi 2";;
+*) echo "foi outra coisa" 
+esac
+
+--
+
+Loops - For
+
+--[text-align=left]
+
+for "condição" do
+
+done
+
+--[text-align=left]
+
+for arq in *.pdf; do
+echo $arq
+done
+
+--[text-align=left]
+for (( i=0 ; i \< 5 ; i++ )); do
+echo $i
+done
+
+--
+
+Loops - While
+
+--[text-align=left]
+
+count=1
+while read line; do
+echo \$count \$line
+\$count = \$((count+1))
+
+done
+
+
+\#chamar com script.sh << /etc/passwd
+
+--[transition=page-curl-both]
+
+Cálculos
+
+--
+
+Estruturas complicadas e cálculos 
+não são o forte do bash
+
+--
+
+Mas existem alguns recursos
+
+--
+
+Variáveis não tem distinção 
+de tipo (mas tem de uso)
+
+--[text-align=left]
+
+a=1
+b=$((2))
+c=$a+$b
+d=$(($a+$b))
+echo "$a + $b = $c"
+echo "$a + $b = $d"
+
+--
+Pode-se também usar o let
+
+b=1
+let b=$b + 1
+
+--[transition=page-curl-both]
+
+Ferramentas úteis
+
+--
+
+<b>cut</b>
+
+seleciona somente uma parte 
+de linhas de entrada
+
+--
+
+cut -f2 abc.txt
+
+cut -f2 -d: /etc/passwd
+--
+
+<b>sort</b>
+
+Ordena as linhas de entrada
+--
+
+sort -k2 abc.txt
+
+--
+
+sort -t: -k3,3 -n /etc/group
+
+--
+
+sort -t: -k3,3 /etc/group
+
+--
+
+<b>uniq</b>
+
+imprime linhas únicas (sem repetição)
+
+--
+
+cut -d: -f7 /etc/passwd | sort | uniq -c
+
+--
+
+<b>wc</b>
+
+Conta linhas, palavras e caracteres
+
+--
+
+<b>tee</b>
+
+Direciona uma saída para outro 
+ponto simultâneo ao padrão
+
+--
+
+find / -name core | tee abc.txt
+
+--
+
+<b>head</b> e <b>tail</b>
+

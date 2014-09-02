@@ -1,0 +1,16 @@
+
+
+1) Iniciar a máquina virtual e logar no sistema
+
+2) Criar arquivo "arquivo.txt" com touch
+
+3) Visualizar o arquivo .bashrc com less
+
+4) Criar/editar um arquivo abc com o editor nano inserindo o seguinte conteúdo
+
+Este é um arquivo teste
+
+Essa é a segunda linha
+
+5) Desligar o sistema (migrar para o root, depois shutdown -h now)
+

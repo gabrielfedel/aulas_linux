@@ -1,0 +1,92 @@
+[text-align=center]
+[linux3.jpg]
+--
+
+ACL
+
+Access Control Lists
+
+--
+
+Sistema de permissão de 9 bits tem limitações
+
+--
+
+Cada arquivo ou diretório pode ter 
+uma ACL associada
+
+Lista as regras de permissões 
+
+--
+
+cada regra é uma ACE
+(access control entry)
+
+--
+
+Habilitando o ACL no Debian
+
+--
+
+1o Passo: Instalar
+
+sudo apt-get install acl
+
+--
+
+2o Passo: Ativar
+
+df -h
+
+sudo mount -o remount,acl /dev/sda1
+sudo mount -o remount,acl /dev/sda5
+
+--
+
+Para se ativar definitivamente
+
+Editar o /etc/fstab
+
+--
+
+Comandos
+
+--
+
+getfacl e setfacl
+
+--
+
+Regras ACL Posix
+
+--
+
+Extensão do modelo de 9 bits
+
+--[regras_acl.png]
+
+--
+
+Usuários e grupos podem ser 
+identificados por nome ou UID/GID
+
+--
+
+Ext* permite até 32 entradas
+
+--
+
+Interação entre modo tradicional e ACL
+
+--
+
+Não pode haver conflito entre ACL 
+e o modo tradicional
+
+--
+
+Exemplo
+
+sudo setfacl -m user:aluno2:r abc
+
+--

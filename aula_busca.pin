@@ -1,0 +1,60 @@
+[text-align=center]
+[linux3.jpg]
+--
+
+Buscando programas e 
+arquivos nos Linux
+--
+
+Procurando Programas
+
+--
+
+which
+
+--[text-align=left]
+
+whereis
+
+  * Binário
+  * Código Fonte
+  * Manuais
+
+--
+
+Procurando Arquivos em Geral
+
+--[text-align=left]
+
+locate
+  * updatedb
+
+--
+
+find [local] [expressão]
+
+find . -name 123
+
+--
+
+find . -mtime 1
+find . -mtime -1
+find . -mtime +1
+
+--
+
+find . -perm 644
+
+--
+
+find . -iname “errors”
+
+(case insensitive)
+
+--
+
+Referências
+
+man
+
+--

@@ -1,0 +1,51 @@
+[text-align=center]
+[linux3.jpg]
+--
+
+Instalando discos
+
+e dispositivos USB
+
+--
+
+
+
+--
+
+Com ambientes gráficos é comum o Debian fazer
+a montagem automática de dispositivos usb
+
+--
+
+Quando não ocorrer é necessrário fazer a 
+montagem manual
+
+--
+
+0) Verificar se o dispositivo foi reconhecido
+
+lsusb
+
+---
+1) Descobrir como o dispositivo foi mapeado
+
+tail -n 20 /var/log/messages | grep kernel
+
+--
+
+1,5) Criar pasta, caso não exista
+
+Ideal criar em /media/
+
+--
+2) Montando o dispositivo
+
+
+mount /dev/sdXX /media/usb
+
+--
+
+Para desmontar
+
+umount /media/usb
+--

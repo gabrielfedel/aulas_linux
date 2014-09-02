@@ -1,0 +1,142 @@
+[text-align=center]
+[linux3.jpg]
+--
+
+Servidor Web
+
+--
+
+Linux é a plataforma mais utilizada para hospedagem Web
+
+--
+
+Pacote LAMP (Linux, Apache, Mysql, PHP)
+
+--
+
+Como funciona a Web?
+
+--
+
+Protocolo HTTP
+
+Protocolo Cliente-Servidor de transferência de arquivos
+
+--
+
+HTTP funcionando na prática
+
+Exemplo: Telnet
+
+
+telnet fatec.edu.br 80
+
+GET /html/fatecam/index.php HTTP/1.1
+Host: fatec.edu.br
+
+--
+
+Conteúdo estático 
+
+Conteúdo dinâmico
+
+--
+
+O Servidor Web Apache
+
+--
+
+Instalando
+
+sudo apt-get install apache2
+
+--
+
+Testando
+
+--
+
+Na configuração padrão
+
+Ouve a porta 80
+
+
+/etc/apache2/ports.conf
+
+--
+
+
+E serve páginas na pasta /var/www
+
+/etc/apache2/sites-enabled/000-default
+
+---
+
+Configurações gerais
+
+/etc/apache2/apache2.conf
+
+---
+
+Virtual Host
+
+-Pode ser configurado pelo endereço ip
+-Pode ser configurado pelo endereço de host
+
+--
+
+Criando um VirtualHost 
+
+arquivo em /etc/apache2/sites-available
+
+--
+
+Conteúdo do arquivo
+
+<VirtualHost *:80>
+ServerName www.fatec.edu.br
+ServerAlias fatec.edu.br
+DocumentRoot /var/www/fatec.edu.br
+</VirtualHost>
+
+--
+
+a2ensite
+
+--
+
+Log
+
+/var/log/apache2
+
+---
+
+Módulos
+
+--
+
+a2enmod module
+a2dismod module
+
+---
+
+/etc/apache2/mods-enabled/
+
+/etc/apache2/mods-available/
+--
+
+
+Outros servidores web
+
+lighttpd
+Nginx
+
+---
+
+Referências
+
+Manual Completo do Linux
+Guia do Administrador
+
+The Debian Administrador's
+HandBook

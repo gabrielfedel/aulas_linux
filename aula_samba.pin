@@ -1,0 +1,54 @@
+[text-align=center]
+[linux3.jpg]
+--
+
+Samba
+--
+
+Conjunto de ferramentas para trabalhar com o protocolo SMB (ou CIFS)
+
+Protocolo utilizado para se comunicar com redes Windows
+
+---
+
+Ferramenta ótima para ter um servidor Linux
+se comunicando com clientes Windows
+--
+
+Instalando
+
+apt-get install samba
+
+---
+
+SWAT 
+
+Ferramenta web de configuração do Samba
+
+---
+
+Necessário habilitar
+
+update-inetd --enable swat
+
+--
+
+Disponível na porta 901
+
+localhost:901
+
+Utilizar root
+
+---
+
+SWAT irá modificar o arquivo de configuração /etc/samba/smb.conf
+
+Pode ser interessante fazer um backup
+
+---
+
+As perguntas de configuração 
+durante a instalação podem ser refeitas com:
+
+dpkg-reconfigure samba-common samba
+
