@@ -85,6 +85,13 @@ Descompactando:
 
 tar xzfv zlib-1.2.8.tar.gz
 
+--
+
+
+Mais opções do tar
+
+http://www.linfo.org/tar.html
+
 --[text-align=left]
 Instalando
 
@@ -248,10 +255,11 @@ pool/main/l/lynx-cur/
 lynx_2.8.8dev.12-2_all.deb
 --
 
-dpkg -i pidgin_2.10.6-3_i386.deb
+dpkg -i lynx_2.8.8dev.12-2_all.deb
 
 --
 
+Dependências!
 
 --
 
@@ -319,11 +327,19 @@ APT - Repositórios
 	deb http://ftp.debian.org/debian/ wheezy main
 	deb-src http://ftp.debian.org/debian/ wheezy main
 
+---
+
+Um pouco sobre os repositórios
+
+--
+
+[tipo de pacote] [fonte] [versão do debian] [main/non-free/contrib]
+
 --
 
 Configurando proxy para APT
 
-pico /etc/apt/apt.conf
+nano /etc/apt/apt.conf
 
 --
 
