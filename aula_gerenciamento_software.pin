@@ -364,11 +364,33 @@ Instalando pacotes
 
 apt-get install
 
+
+--
+
+APT
+Removendo pacotes
+
+apt-get remove
+
+
 --
 APT
 procurando pacotes
 
 apt-cache search
+
+
+--
+
+Outros comandos do apt
+
+apt-cache policy
+
+--
+
+Atualizando os pacotes
+
+apt-get upgrade
 
 --
 
@@ -377,11 +399,6 @@ Voltando ao lynx
 dpkg -r lynx
 apt-get install lynx
 
---
-
-Outros comandos do apt
-
-apt-cache policy
 
 --
 

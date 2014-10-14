@@ -197,6 +197,13 @@ O arquivo /etc/network/interfaces
 
 --
 
+Deixando o DHCP habilitado
+
+allow-hotplug eth0
+iface eth0 inet dhcp
+
+--
+
 Deixando um endereço fixado
 
 iface eth0 inet static
@@ -205,6 +212,15 @@ iface eth0 inet static
 	gateway 192.168.1.254
 
 --
+
+Habilitando e desabilitando configurações no 
+/etc/network/interfaces
+
+ifdown eth0
+ifup eth0
+
+--
+
 Referências
 
 Manual Completo do Linux

@@ -44,7 +44,7 @@ cron é chamado crontab
 
 --
 
-Ficam armazenados em <b>/var/spool/cron</b>
+Ficam armazenados em <b>/var/spool/cron/crontabs/</b>
 
 --
 
