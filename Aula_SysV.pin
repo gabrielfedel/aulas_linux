@@ -43,20 +43,16 @@ para iniciar ou finalizar (S ou K)
 O nome também indica a ordem 
 em que precisam ser inicializados
 
----
-
-Construindo e configurando um 
-script para inicializar e finalizar
-
 --
 
 Utilizando o update-rc.d
 
 
-update-rc.d name [defaults, remove, start | stop]
+update-rc.d name [defaults, remove, disable | enable]
+
 --
 
-defaults: start on 2,3,4,5 and stop 0,1,6
+defaults: start no 2,3,4,5 e stop 0,1,6
 
 --
 
@@ -119,6 +115,12 @@ Exemplo de Parâmetros mínimos:
 \# Default-Stop:      0 1 6
 \# Description:       Descrição
 \### END INIT INFO
+
+---
+
+Habilitando o script
+
+update-rc.d script defaults
 
 ---
 
