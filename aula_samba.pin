@@ -5,14 +5,18 @@
 Samba
 --
 
-Conjunto de ferramentas para trabalhar com o protocolo SMB (ou CIFS)
+Conjunto de ferramentas para trabalhar com o protocolo SMB (também conhecido como CIFS)
 
 Protocolo utilizado para se comunicar com redes Windows
+
+Também pode ser um um controlador de domínio Windows
 
 ---
 
 Ferramenta ótima para ter um servidor Linux
 se comunicando com clientes Windows
+
+
 --
 
 Instalando

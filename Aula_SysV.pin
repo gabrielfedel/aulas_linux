@@ -25,6 +25,8 @@ O Debian tem 7 run levels:
  2 à 5 -> modo multi-usuário
  6 -> Reiniciando o sistema
 
+ S -> Ligando o sistema
+
 --
 
 Os scripts ficam em uma pasta /etc/rc*.d/
